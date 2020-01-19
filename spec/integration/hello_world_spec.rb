@@ -1,9 +1,6 @@
-ENV['APP_ENV'] = 'test'
-
+require 'sinatra_helper'
 require_relative  "../../app/app.rb"
 
-require 'rspec'
-require 'rack/test'
 
 describe "Upcomming movies app" do
   include Rack::Test::Methods
