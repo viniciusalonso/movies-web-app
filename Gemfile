@@ -10,3 +10,4 @@ gem "rack-test"
 gem "rack"
 gem 'simplecov', require: false, group: :test
 gem "dotenv"
+gem 'faraday'
