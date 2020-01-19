@@ -11,3 +11,5 @@ gem "rack"
 gem 'simplecov', require: false, group: :test
 gem "dotenv"
 gem 'faraday'
+gem 'pry'
+gem 'pry-byebug'
