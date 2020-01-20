@@ -6,8 +6,17 @@ describe Presenters::Movie do
     {
       "poster_path" =>"/y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg",
       "title" =>"Bad Boys for Life",
-      "release_date" =>"2020-01-15"
+      "release_date" =>"2020-01-15",
+      "genre_ids" => [4, 8]
     }
+  end
+
+  let(:genres) do
+    [
+      {"id" => 4, "name" => "Action"},
+      {"id" => 6, "name" => "Horror"},
+      {"id" => 8, "name" => "Drama"},
+    ]
   end
 
   subject {  described_class.new params }
@@ -28,6 +37,13 @@ describe Presenters::Movie do
     it 'should returns full url from image' do
       url = "https://image.tmdb.org/t/p/w185///y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg"
       expect(subject.poster_path).to eq(url)
+    end
+  end
+
+  describe "#formated_genres" do
+    it 'returns genres joined string' do
+      string = "Action, Drama"
+      expect(subject.formated_genres(genres)).to eq(string)
     end
   end
 

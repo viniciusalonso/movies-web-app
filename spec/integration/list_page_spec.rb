@@ -23,12 +23,24 @@ describe "Upcoming movies app" do
     ]
   end
 
+  let(:genres) do
+    [
+      {"id" => 28, "name" => "Action"},
+      {"id" => 6, "name" => "Horror"},
+      {"id" => 8, "name" => "Drama"},
+      {"id" => 80, "name" => "Crime"},
+      {"id" => 53, "name" => "Thriller"},
+    ]
+  end
+
   before do
     ENV['TMDB_API_KEY'] = 'abc123'
     ENV['TMDB_API_BASE_URL'] = "https://api.themoviedb.org/3/"
 
     allow_any_instance_of(::Services::Movie::Upcoming).to receive(:get)
       .and_return(movies)
+
+    allow_any_instance_of(::Services::Movie::Genres).to receive(:get).and_return(genres)
   end
 
   describe 'GET /' do
@@ -50,6 +62,12 @@ describe "Upcoming movies app" do
       expect(last_response.body).to include("Bad Boys for Life")
       expect(last_response.body).to include("2020/01/15")
       expect(last_response.body).to include("/y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg")
+    end
+
+    it 'show genres list to movie' do
+      get '/'
+
+      expect(last_response.body).to include("Genres: Action, Crime, Thriller")
     end
 
   end
