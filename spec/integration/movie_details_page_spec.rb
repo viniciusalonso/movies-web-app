@@ -58,20 +58,5 @@ describe "Show movie details" do
     end
 
     end
-    # context 'with a invalid movie id' do
-    #   let(:not_found)  { "The resource you request could not be found" }
-
-    #   before do
-    #     allow_any_instance_of(::Services::Movie::Details).to receive(:get)
-    #       .and_return(not_found)
-    #   end
-
-    #   subject { get '/movie/111111111111' }
-
-    #   it 'redirect to listing' do
-    #     expect(subject).to redirect_to('/')
-    #   end
-    # end
-
   end
 end
