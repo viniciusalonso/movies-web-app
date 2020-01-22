@@ -24,7 +24,7 @@ module Presenters
       "https://image.tmdb.org/t/p/w185//#{@poster_path}"
     end
 
-    def formated_genres genres
+    def formated_genres genres = {}
       get_genres(genres)
         .map { |genre| genre['name'] }
         .join(', ')

@@ -8,10 +8,10 @@ base_url = ENV['TMDB_API_BASE_URL']
 api_key = ENV['TMDB_API_KEY']
 root_app = ENV['ROOT_APP']
 
-genres_service = Services::Movie::Genres.new(base_url, api_key)
-genres = genres_service.get
-
 get '/' do
+  genres_service = Services::Movie::Genres.new(base_url, api_key)
+  genres = genres_service.get
+
   upcoming_service = Services::Movie::Upcoming.new(base_url, api_key)
   erb :index, locals: { movies: upcoming_service.get, genres: genres  }
 end
@@ -23,5 +23,5 @@ get '/movie/:movie_id' do
 
   redirect '/' if movie.nil?
 
-  erb :details, locals: { movie: movie, genres: genres  }
+  erb :details, locals: { movie: movie }
 end
