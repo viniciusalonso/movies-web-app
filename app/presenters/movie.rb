@@ -1,13 +1,16 @@
 module Presenters
   class Movie
 
-    attr_reader :title
+    attr_reader :title, :id, :overview
 
     def initialize data
       @title = data['title']
       @release_date = data['release_date']
       @poster_path = data['poster_path']
       @genre_ids = data['genre_ids']
+      @genres = data['genres']
+      @id = data['id']
+      @overview = data['overview']
     end
 
     def release_date
@@ -22,11 +25,20 @@ module Presenters
     end
 
     def formated_genres genres
-      genres
-        .to_a
-        .select { |genre| @genre_ids.include?(genre['id']) }
+      get_genres(genres)
         .map { |genre| genre['name'] }
         .join(', ')
+    end
+
+    private
+
+    def get_genres genres
+      unless @genre_ids.nil?
+      return genres
+        .to_a
+        .select { |genre| @genre_ids.include?(genre['id']) }
+      end
+      @genres.to_a
     end
 
   end

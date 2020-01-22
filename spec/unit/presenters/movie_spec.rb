@@ -7,7 +7,8 @@ describe Presenters::Movie do
       "poster_path" =>"/y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg",
       "title" =>"Bad Boys for Life",
       "release_date" =>"2020-01-15",
-      "genre_ids" => [4, 8]
+      "genre_ids" => [4, 8],
+      "id" => 38700
     }
   end
 
@@ -44,6 +45,12 @@ describe Presenters::Movie do
     it 'returns genres joined string' do
       string = "Action, Drama"
       expect(subject.formated_genres(genres)).to eq(string)
+    end
+  end
+
+  describe "#id" do
+    it 'returns movie id' do
+      expect(subject.id).to eq(38700)
     end
   end
 

@@ -1,6 +1,7 @@
 require 'sinatra'
 require_relative './services/movie/upcoming.rb'
 require_relative './services/movie/genres.rb'
+require_relative './services/movie/details.rb'
 require 'dotenv/load'
 
 base_url = ENV['TMDB_API_BASE_URL']
@@ -13,4 +14,14 @@ genres = genres_service.get
 get '/' do
   upcoming_service = Services::Movie::Upcoming.new(base_url, api_key)
   erb :index, locals: { movies: upcoming_service.get, genres: genres  }
+end
+
+get '/movie/:movie_id' do
+  movie_id = params[:movie_id]
+  details_service = Services::Movie::Details.new(base_url, api_key, movie_id)
+  movie = details_service.get
+
+  redirect '/' if movie.nil?
+
+  erb :details, locals: { movie: movie, genres: genres  }
 end
