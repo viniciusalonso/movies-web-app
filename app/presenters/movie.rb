@@ -7,6 +7,7 @@ module Presenters
       @title = data['title']
       @release_date = data['release_date']
       @poster_path = data['poster_path']
+      @backdrop_path = data['backdrop_path']
       @genre_ids = data['genre_ids']
       @genres = data['genres']
       @id = data['id']
@@ -14,14 +15,20 @@ module Presenters
     end
 
     def release_date
-      date = @release_date.split('-').map(&:to_i)
-      Date.
-        new(date[0], date[1], date[2])
-        .strftime("%Y/%m/%d")
+      begin
+        date = @release_date.split('-').map(&:to_i)
+        Date.
+          new(date[0], date[1], date[2])
+          .strftime("%Y/%m/%d")
+      rescue
+        '-'
+      end
     end
 
-    def poster_path
-      "https://image.tmdb.org/t/p/w185//#{@poster_path}"
+    def image_path
+      return "https://image.tmdb.org/t/p/w185//#{@poster_path}" unless @poster_path.nil?
+      return "https://image.tmdb.org/t/p/w185//#{@backdrop_path}" unless @backdrop_path.nil?
+      "https://carolinadojo.com/wp-content/uploads/2017/04/default-image.jpg"
     end
 
     def formated_genres genres = {}
@@ -34,9 +41,9 @@ module Presenters
 
     def get_genres genres
       unless @genre_ids.nil?
-      return genres
-        .to_a
-        .select { |genre| @genre_ids.include?(genre['id']) }
+        return genres
+          .to_a
+          .select { |genre| @genre_ids.include?(genre['id']) }
       end
       @genres.to_a
     end
