@@ -21,8 +21,12 @@ module Services
       end
 
       def handle_results
-        return @parsed_results['results'].map { |movie| ::Presenters::Movie.new(movie) } if @response.status == 200
-        return [] if @response.status == 422
+        return { movies: [], total_pages: 0 } if @response.status == 422
+
+        if @response.status == 200
+          movies = @parsed_results['results'].map { |movie| ::Presenters::Movie.new(movie) }
+          { movies: movies, total_pages: @parsed_results['total_pages'] }
+        end
       end
 
     end

@@ -14,7 +14,6 @@ root_app = ENV['ROOT_APP']
 get '/' do
   page = params[:page] || 1
 
-
   genres_service = Services::Movie::Genres.new(base_url, api_key)
   genres = genres_service.get
 
@@ -34,7 +33,14 @@ get '/movie/search' do
   query = params[:query]
 
   search_service = Services::Movie::Search.new(base_url, api_key, query)
-  erb :index, locals: { movies: search_service.get, genres: genres }
+  response = search_service.get
+
+  page = params[:page] || 1
+
+  range = (1..response[:total_pages])
+  pagination = Helpers::Pagination.new(range, "/movie/search?query=#{query}&")
+
+  erb :index, locals: { movies: response[:movies], genres: genres, pagination: pagination }
 end
 
 get '/movie/:movie_id' do
