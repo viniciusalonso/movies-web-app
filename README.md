@@ -3,7 +3,7 @@
 
 ## Requirements
 
-* Ruby 2.3.7, see how to install here;
+* Ruby 2.3.7, see how to install [here](https://www.ruby-lang.org/en/documentation/installation/);
 * `gem i bunlder`
 
 ## Running the application
