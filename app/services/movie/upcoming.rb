@@ -5,6 +5,11 @@ module Services
   module Movie
     class Upcoming < Base
 
+      def initialize base_url, api_key, page = 1
+        super(base_url, api_key)
+        @page = page
+      end
+
       protected
 
       def path
@@ -12,11 +17,12 @@ module Services
       end
 
       def build_endpoint
-        "#{@base_url}#{path}?api_key=#{@api_key}&language=en-US&page=1"
+        "#{@base_url}#{path}?api_key=#{@api_key}&language=en-US&page=#{@page}"
       end
 
       def handle_results
-        @parsed_results['results'].map { |movie| ::Presenters::Movie.new(movie) }
+        movies = @parsed_results['results'].map { |movie| ::Presenters::Movie.new(movie) }
+        { 'movies': movies, 'total_pages': @parsed_results['total_pages'] }
       end
 
     end

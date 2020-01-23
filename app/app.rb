@@ -3,18 +3,28 @@ require_relative './services/movie/upcoming.rb'
 require_relative './services/movie/genres.rb'
 require_relative './services/movie/details.rb'
 require_relative './services/movie/search.rb'
+require_relative './helpers/pagination.rb'
 require 'dotenv/load'
+require 'pry'
 
 base_url = ENV['TMDB_API_BASE_URL']
 api_key = ENV['TMDB_API_KEY']
 root_app = ENV['ROOT_APP']
 
 get '/' do
+  page = params[:page] || 1
+
+
   genres_service = Services::Movie::Genres.new(base_url, api_key)
   genres = genres_service.get
 
-  upcoming_service = Services::Movie::Upcoming.new(base_url, api_key)
-  erb :index, locals: { movies: upcoming_service.get, genres: genres  }
+  upcoming_service = Services::Movie::Upcoming.new(base_url, api_key, page)
+  response = upcoming_service.get
+  range = (1..response[:total_pages])
+
+  pagination = Helpers::Pagination.new(range, '/')
+
+  erb :index, locals: { movies: response[:movies] , genres: genres, pagination: pagination  }
 end
 
 get '/movie/search' do

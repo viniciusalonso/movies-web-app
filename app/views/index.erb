@@ -13,3 +13,9 @@
     </div>
   </div>
 <% end %>
+
+<div class="grid-item text-center">
+  <% pagination.paginate.each_with_index do |url, index| %>
+    <a href="<%= url %>" class="btn"><%= index + 1 %></a>
+  <% end %>
+</div>

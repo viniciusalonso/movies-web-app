@@ -7,20 +7,25 @@ describe "Upcoming movies app" do
     Sinatra::Application
   end
 
-  let(:movies) do
-    [
-      ::Presenters::Movie.new({
-        "poster_path" => "/y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg",
-        "id" => 38700,
-        "genre_ids" => [
-          28,
-          80,
-          53
-        ],
-        "title" => "Bad Boys for Life",
-        "release_date" => "2020-01-15"
-      }),
-    ]
+  let(:response) do
+    {
+      movies: [
+        ::Presenters::Movie.new({
+          "poster_path" => "/y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg",
+          "id" => 38700,
+          "genre_ids" => [
+            28,
+            80,
+            53
+          ],
+          "title" => "Bad Boys for Life",
+          "release_date" => "2020-01-15"
+        }),
+
+      ],
+
+      total_pages: 1
+    }
   end
 
   let(:genres) do
@@ -38,7 +43,7 @@ describe "Upcoming movies app" do
     ENV['TMDB_API_BASE_URL'] = "https://api.themoviedb.org/3/"
 
     allow_any_instance_of(::Services::Movie::Upcoming).to receive(:get)
-      .and_return(movies)
+      .and_return(response)
 
     allow_any_instance_of(::Services::Movie::Genres).to receive(:get).and_return(genres)
   end

@@ -43,8 +43,8 @@ describe Services::Movie::Upcoming do
       end
 
       it 'should returns presenters movie array' do
-        expect(subject.get.length).to eq(1)
-        expect(subject.get.first).to be_instance_of(::Presenters::Movie)
+        expect(subject.get[:movies].length).to eq(1)
+        expect(subject.get[:movies].first).to be_instance_of(::Presenters::Movie)
       end
     end
 
