@@ -1,5 +1,3 @@
-require 'faraday'
-require 'pry'
 require_relative './base.rb'
 require_relative "../../presenters/movie.rb"
 
