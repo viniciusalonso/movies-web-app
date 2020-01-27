@@ -33,11 +33,11 @@ $ rspec
 
 ## Mindset to gets it solution
 
-One important aspect is: it's only an MVP. Thinking in this way I thought of skipping all unnecessary tools at this moment. The main goal of MVP in point of view is to validate an idea before start to invest more time and energy.
+One important aspect is: it's only an MVP. Thinking in this way I thought of skipping all unnecessary tools at this moment. The main goal of MVP in my point of view is to validate an idea before start to invest more time and energy.
 
-In beginning, I thought in to use Ruby on Rails framework, but after thinking better, my was that a full-stack framework will only add more complexity than necessary, it will be required to install a database for example.
+In beginning, I thought to use Ruby on Rails framework, but after thinking better, to use a full-stack framework will only add more complexity than necessary, for example, it will be required to install a database.
 
-I thought also in use Vuejs in frontend and I skipped this idea. Because Vuejs will only add complexity to setup stuff like nodejs. Another skipped idea was to build a SPA app because this MVP is a content site and this site depends on be find out, SPA's app doesn't find out for search engineers, generating a problem in SEO.
+I thought also in use Vuejs in front-end and I skipped this idea. Because Vuejs will only add complexity to setup stuffs like Nodejs. Another skipped idea it was to build a SPA app, because this MVP is a content site and this kind of site depends on be finds out, SPA's app doesn't find out for search engineers, generating a problem in SEO.
 
 To keep it simple I decided to use a small framework to handle HTTP requests and separate the concerns in different layers.
 
