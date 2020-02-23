@@ -1,0 +1,21 @@
+<% movies.each do |movie| %>
+  <div class="card grid-item" style="width: 18rem;">
+    <img src="<%= movie.image_path %>" class="card-img-top" alt="<%= movie.title %>">
+    <div class="card-body">
+      <h5 class="card-title"><%= movie.title %></h5>
+      <p class="card-text">
+        Release date: <%= movie.release_date %>
+      </p>
+      <p>
+        Genres: <%= movie.formated_genres(genres) %>
+      </p>
+      <a href="/movie/<%= movie.id %>" class="btn btn-primary">Details</a>
+    </div>
+  </div>
+<% end %>
+
+<div class="grid-item text-center">
+  <% pagination.paginate.each_with_index do |url, index| %>
+    <a href="<%= url %>" class="btn"><%= index + 1 %></a>
+  <% end %>
+</div>
